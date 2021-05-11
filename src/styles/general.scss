@@ -1,0 +1,28 @@
+// IMPORT VARS
+@import './vars';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $main-font;
+    color: $text-col;
+}
+
+// UTILITIES
+.flex {
+    display: flex;
+}
+.jc-center{
+    justify-content: center;
+}
+.jc-between {
+    justify-content: space-between;
+}
+.ai-center {
+    align-items: center;
+}
+

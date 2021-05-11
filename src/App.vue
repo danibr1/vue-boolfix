@@ -1,28 +1,71 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app">
+	
+		<Header @search="searchFilm"/>
+
+		<Main :movies="moviesList"/>
+
+	</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios';
+
+import Header from './components/Header.vue';
+import Main from './components/Main.vue';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    name: 'App',
+    components: {
+        Header,
+		Main,
+    },
+	data() {
+		return {
+			moviesList: [],
+			seriesList: [],
+			movieUrl: "https://api.themoviedb.org/3/movie/550?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d",
+			seriesUrl: "https://api.themoviedb.org/3/tv/550?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d",
+		}
+	},
+	methods: {
+		// API CALL MOVIES
+		searchFilm(search) {
+			axios
+				.get ("https://api.themoviedb.org/3/search/movie?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d", {
+					params: {
+						query: search,
+						language: "it-IT"
+					},
+				})
+				.then((res) => {
+					this.moviesList = res.data.results;
+				})
+				.catch((err) => {
+					console.log('Error', err);
+				});
+			
+			// API CALL SERIES
+			axios
+				.get ("https://api.themoviedb.org/3/search/movie?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d", {
+					params: {
+						query: search,
+						language: "it-IT"
+					},
+				})
+				.then((res) => {
+					this.seriesList = res.data.results;
+				})
+				.catch((err) => {
+					console.log('Error', err);
+				});
+			},
+		},
+	};
 </script>
 
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+	// SCSS GENERAL
+
 </style>
