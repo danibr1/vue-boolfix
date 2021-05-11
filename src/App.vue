@@ -3,7 +3,8 @@
 	
 		<Header @search="searchFilm"/>
 
-		<Main :movies="moviesList"/>
+		<!-- Merge result array in "films" -->
+		<Main :films="moviesList.concat(seriesList)"/>
 
 	</div>
 </template>
@@ -24,8 +25,8 @@ export default {
 		return {
 			moviesList: [],
 			seriesList: [],
-			movieUrl: "https://api.themoviedb.org/3/movie/550?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d",
-			seriesUrl: "https://api.themoviedb.org/3/tv/550?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d",
+			movieDefaultUrl: "https://api.themoviedb.org/3/movie/550?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d",
+			seriesDefaultUrl: "https://api.themoviedb.org/3/tv/550?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d",
 		}
 	},
 	methods: {
@@ -47,7 +48,7 @@ export default {
 			
 			// API CALL SERIES
 			axios
-				.get ("https://api.themoviedb.org/3/search/movie?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d", {
+				.get ("https://api.themoviedb.org/3/search/tv?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d", {
 					params: {
 						query: search,
 						language: "it-IT"
