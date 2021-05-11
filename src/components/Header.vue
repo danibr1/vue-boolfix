@@ -1,12 +1,10 @@
 <template>
     <header class="flex jc-between ai-center "> 
-        
-		<!-- BRAND -->
+        <!-- BRAND -->
         <img :src="logo.img" :alt="logo.name">
         
         <!-- SEARCH -->
         <Search @search="searchItem"/>
-      
 	</header>
 </template>
 

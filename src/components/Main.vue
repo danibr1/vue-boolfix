@@ -6,6 +6,7 @@
 			<ul class="movie-list">
 				<li v-for="item in films" :key="item.id">
 					
+					<!-- CARD -->
 					<ul>
 						<!-- POSTER -->
 						<li>
@@ -17,7 +18,6 @@
 							<img v-else
 								:src="require('@/assets/img/poster-null.png')" alt=""
 							>
-
 						</li>
 						<!-- NAME: Check movies or series -->
 						<li>
@@ -50,15 +50,32 @@
 						<!-- VOTE -->
 						<li>
 							<strong>Voto:</strong> 
-							<span>{{item.vote_average}}</span>
+							<span>{{(item.vote_average / 2).toFixed(2) }}</span>
+							<!-- Full stars -->
+							<i
+								v-for="(star, index) in Math.floor(item.vote_average / 2)"
+								:key="'fullStar'+index"
+								class="fas fa-star"
+							>
+							</i>
+							<!-- Half stars -->
+							<i
+								v-show="((item.vote_average / 2) - Math.floor(item.vote_average / 2) > 0.5)"
+								class="fas fa-star-half-alt"
+							>
+							</i>
+							<!-- Empty stars -->
+							<i
+								v-for="(star, index) in 5 - Math.floor(item.vote_average / 2)"
+								:key="'emptyStar'+index"
+								class="far fa-star"
+							>
+							</i>
 						</li>
-
 					</ul>
-
 				</li>
 			</ul>
 		</section>
-
 	</main>
 </template>
 
@@ -68,15 +85,17 @@ export default {
 	props: {
 		films: Array,
 	},
+		
 	data () {
 		return {
 			flags: ["it", "en"],
 		};
-	}
+	},
 }
 </script>
 
 <style scoped lang="scss">
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css";
 @import '@/styles/general';
 	ul {
 		margin: 1rem 0;
