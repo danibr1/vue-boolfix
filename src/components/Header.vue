@@ -2,7 +2,7 @@
     <header class="flex jc-between ai-center "> 
         
 		<!-- BRAND -->
-        <img :src='logo.img' :alt="logo.name">
+        <img :src="logo.img" :alt="logo.name">
         
         <!-- SEARCH -->
         <Search @search="searchItem"/>
@@ -22,7 +22,7 @@ export default {
         return {
             searchFilm: '',
             logo: {
-                img: require('@/img/bruno.png'),
+                img: "https://fontmeme.com/permalink/210511/ba5cfce3f8e07f7651ec5e9120c84736.png",
                 name: 'Brunoflix'
             },
         }

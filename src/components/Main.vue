@@ -10,7 +10,8 @@
 						<!-- POSTER -->
 						<li>
 							<img v-if="item.poster_path != null"
-								:src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt="item."
+								:src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" 
+								:alt=" item.title == null ? item.name : item.title "
 							>
 							<!-- Poster = null -->
 							<img v-else
