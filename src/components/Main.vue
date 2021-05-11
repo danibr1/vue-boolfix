@@ -7,24 +7,36 @@
 				<li v-for="item in films" :key="item.id">
 					
 					<ul>
-						<!-- Check Name movies or series -->
+						<!-- POSTER -->
+						<li>
+							<img v-if="item.poster_path != null"
+								:src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt="item."
+							>
+							<!-- Poster = null -->
+							<img v-else
+								:src="require('@/assets/img/poster-null.png')" alt=""
+							>
+
+						</li>
+						<!-- NAME: Check movies or series -->
 						<li>
 							<strong>Titolo:</strong>  
 							{{ item.title == null ? item.name : item.title }}
 						</li>
 						
-						<!-- Check Original Name movies or series -->
+						<!-- ORIGINAL NAME: check movies or series -->
 						<li>
 							<strong>Titolo originale:</strong> 
-							{{ item.original_title == null ? item.original_name : item.original_title }}
+							<span>{{ item.original_title == null ? item.original_name : item.original_title }}</span>
 						</li>
 						
-						
+						<!-- LANGUAGE: Check if not include "it" & "en" -->
 						<li v-if="!flags.includes(item.original_language)">
-							<strong>Lingua: </strong> {{item.original_language}}
+							<strong>Lingua: </strong> 
+							<span>{{item.original_language}}</span>
 						</li>
 
-						<!-- FLAG IF LANGUAGE = IT / EN -->
+						<!-- LANGUAGE FLAG IMG: if language = IT / EN -->
 						<li class="flag-language flex" v-else>
 							<strong>Lingua</strong>
 							<img 
@@ -34,7 +46,11 @@
 							>
 						</li>
 						
-						<li><strong>Voto:</strong> {{item.vote_average}}</li>
+						<!-- VOTE -->
+						<li>
+							<strong>Voto:</strong> 
+							<span>{{item.vote_average}}</span>
+						</li>
 
 					</ul>
 

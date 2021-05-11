@@ -1,5 +1,6 @@
 <template>
     <header class="flex jc-between ai-center "> 
+        
 		<!-- BRAND -->
         <img :src='logo.img' :alt="logo.name">
         
