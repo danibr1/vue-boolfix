@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- CARD -->
         <ul>
             <!-- POSTER -->
             <li>
@@ -25,22 +24,18 @@
                 <span>{{ info.original_title == null ? info.original_name : info.original_title }}</span>
             </li>
             
-            <!-- LANGUAGE: Check if not include array language -->
-            <li v-if="!flags.includes(info.original_language)">
-                <strong>Lingua: </strong> 
-                <span>{{info.original_language}}</span>
-            </li>
-
-            <!-- LANGUAGE FLAG IMG: if language = IT / EN -->
-            <li class="flag-language flex" v-else>
-                <strong>Lingua:</strong>
+            <!-- LANGUAGE: -->
+            <li class="flex">
+                 <strong>Lingua:</strong>
                 <img 
                     class="flag-language"
-                    :src="require(`@/assets/img/${info.original_language}.png`)" 
-                    alt="info.original_language"
+                    v-if="isFlag(info.original_language)"
+                    :src="require(`@/assets/img/${info.original_language}.png`)"  
+                    :alt="info.original_language"
                 >
+                <span v-else>{{info.original_language}}</span>
             </li>
-            
+                        
             <!-- VOTE -->
             <li>
                 <strong>Voto:</strong> 
@@ -93,7 +88,12 @@ export default {
             flags: ["it", "en", "de", "es", "pt", "hi", "fr", "cs", "hu", "ko", "nl", "ja"],
         };
     },
-}
+    methods: {
+        isFlag (lang) {
+            return this.flags.includes(lang);
+        },
+    },
+};
 </script>
 
 <style scoped lang="scss">
@@ -108,7 +108,7 @@ export default {
 	}
 
 	.flag-language {
-		width: 60px;
+		width: 30;
 		height: 24px;
 	}
 </style>
