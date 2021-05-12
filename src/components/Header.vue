@@ -36,7 +36,8 @@ export default {
 
 <style scoped lang="scss">
 @import '@/styles/general';
-  
+    
+
     img {
         width: 150px;
     }
