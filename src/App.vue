@@ -15,8 +15,8 @@
 <script>
 import axios from 'axios';
 
-import Header from './components/Header.vue';
-import Main from './components/Main.vue';
+import Header from '@/components/Header.vue';
+import Main from '@/components/Main.vue';
 
 export default {
     name: 'App',
@@ -30,8 +30,6 @@ export default {
 			apiKey: '486ea1d24aaf19cdf5b08c8d82fbf42d',
 			moviesList: [],
 			seriesList: [],
-			movieDefaultUrl: "https://api.themoviedb.org/3/movie/550?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d",
-			seriesDefaultUrl: "https://api.themoviedb.org/3/tv/550?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d",
 			loading: true,
 			result: false,
 		}

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Search from '@/components/Search.vue';
+import Search from '@/components/Search';
 
 export default {
     name: 'Header',
@@ -37,7 +37,6 @@ export default {
 <style scoped lang="scss">
 @import '@/styles/general';
     
-
     img {
         width: 150px;
     }
