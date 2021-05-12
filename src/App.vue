@@ -3,8 +3,11 @@
 	
 		<Header @search="searchFilm"/>
 
-		<!-- Merge result array in "films" -->
-		<Main :films="moviesList.concat(seriesList)"/>
+		<div v-if="!loading && result===true">
+			<!-- Merge result array in "films" -->
+			<Main :films="moviesList.concat(seriesList)"/>
+		</div>
+		<div v-else>Nessun risulta > effettua una ricerca</div>
 
 	</div>
 </template>
@@ -27,6 +30,8 @@ export default {
 			seriesList: [],
 			movieDefaultUrl: "https://api.themoviedb.org/3/movie/550?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d",
 			seriesDefaultUrl: "https://api.themoviedb.org/3/tv/550?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d",
+			loading: true,
+			result: false,
 		}
 	},
 	methods: {
@@ -41,6 +46,8 @@ export default {
 				})
 				.then((res) => {
 					this.moviesList = res.data.results;
+					this.loading = false;
+					this.result = true;
 				})
 				.catch((err) => {
 					console.log('Error', err);
@@ -56,6 +63,8 @@ export default {
 				})
 				.then((res) => {
 					this.seriesList = res.data.results;
+					this.loading = false;
+					this.result = true;
 				})
 				.catch((err) => {
 					console.log('Error', err);
@@ -67,6 +76,5 @@ export default {
 
 
 <style lang="scss">
-	// SCSS GENERAL
 
 </style>

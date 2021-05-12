@@ -31,7 +31,7 @@
 							<span>{{ item.original_title == null ? item.original_name : item.original_title }}</span>
 						</li>
 						
-						<!-- LANGUAGE: Check if not include "it" & "en" -->
+						<!-- LANGUAGE: Check if not include array language -->
 						<li v-if="!flags.includes(item.original_language)">
 							<strong>Lingua: </strong> 
 							<span>{{item.original_language}}</span>
@@ -39,7 +39,7 @@
 
 						<!-- LANGUAGE FLAG IMG: if language = IT / EN -->
 						<li class="flag-language flex" v-else>
-							<strong>Lingua</strong>
+							<strong>Lingua:</strong>
 							<img 
 								class="flag-language"
 								:src="require(`@/assets/img/${item.original_language}.png`)" 
@@ -60,17 +60,29 @@
 							</i>
 							<!-- Half stars -->
 							<i
-								v-show="((item.vote_average / 2) - Math.floor(item.vote_average / 2) > 0.5)"
+								v-show="((item.vote_average / 2) - Math.floor(item.vote_average / 2) > 0.49)"
 								class="fas fa-star-half-alt"
 							>
 							</i>
-							<!-- Empty stars -->
-							<i
-								v-for="(star, index) in 5 - Math.floor(item.vote_average / 2)"
-								:key="'emptyStar'+index"
-								class="far fa-star"
+							<!-- Empty stars with precedent half star-->
+							<span v-if="((item.vote_average / 2) - Math.floor(item.vote_average / 2) > 0.49)"
 							>
-							</i>
+								<i	
+									v-for="(star, index) in 4 - Math.floor(item.vote_average / 2)"
+									:key="'emptyStar'+index"
+									class="far fa-star"
+								>
+								</i>
+							</span>
+							<!-- Empty stars without half star-->
+							<span v-else>
+								<i	
+									v-for="(star, index) in 5 - Math.floor(item.vote_average / 2)"
+									:key="'emptyStar'+index"
+									class="far fa-star"
+								>
+								</i>
+							</span>
 						</li>
 					</ul>
 				</li>
@@ -88,7 +100,7 @@ export default {
 		
 	data () {
 		return {
-			flags: ["it", "en"],
+			flags: ["it", "en", "de", "es", "pt", "hi", "fr", "cs", "hu", "ko", "nl", "ja"],
 		};
 	},
 }
@@ -97,6 +109,7 @@ export default {
 <style scoped lang="scss">
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css";
 @import '@/styles/general';
+
 	ul {
 		margin: 1rem 0;
 		li {
@@ -105,7 +118,7 @@ export default {
 	}
 
 	.flag-language {
-		width: 30px;
-		height: 14px;
+		width: 60px;
+		height: 24px;
 	}
 </style>
