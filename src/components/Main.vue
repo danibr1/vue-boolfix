@@ -3,105 +3,25 @@
 		<section class="movies">
 			<h1>Movies</h1>
 
-			<ul class="movie-list">
-				<li v-for="item in films" :key="item.id">
-					
-					<!-- CARD -->
-					<ul>
-						<!-- POSTER -->
-						<li>
-							<img v-if="item.poster_path != null"
-								:src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" 
-								:alt=" item.title == null ? item.name : item.title "
-							>
-							<!-- Poster = null -->
-							<img v-else
-								:src="require('@/assets/img/poster-null.png')" alt=""
-							>
-						</li>
-						<!-- NAME: Check movies or series -->
-						<li>
-							<strong>Titolo:</strong>  
-							{{ item.title == null ? item.name : item.title }}
-						</li>
-						
-						<!-- ORIGINAL NAME: check movies or series -->
-						<li>
-							<strong>Titolo originale:</strong> 
-							<span>{{ item.original_title == null ? item.original_name : item.original_title }}</span>
-						</li>
-						
-						<!-- LANGUAGE: Check if not include array language -->
-						<li v-if="!flags.includes(item.original_language)">
-							<strong>Lingua: </strong> 
-							<span>{{item.original_language}}</span>
-						</li>
+			<div>
+				<!-- Elemento CARD -->
+				<Card v-for="item in films" :key="item.id" :datails="item"/>
+			</div>
 
-						<!-- LANGUAGE FLAG IMG: if language = IT / EN -->
-						<li class="flag-language flex" v-else>
-							<strong>Lingua:</strong>
-							<img 
-								class="flag-language"
-								:src="require(`@/assets/img/${item.original_language}.png`)" 
-								alt="item.original_language"
-							>
-						</li>
-						
-						<!-- VOTE -->
-						<li>
-							<strong>Voto:</strong> 
-							<span>{{(item.vote_average / 2).toFixed(2) }}</span>
-							<!-- Full stars -->
-							<i
-								v-for="(star, index) in Math.floor(item.vote_average / 2)"
-								:key="'fullStar'+index"
-								class="fas fa-star"
-							>
-							</i>
-							<!-- Half stars -->
-							<i
-								v-show="((item.vote_average / 2) - Math.floor(item.vote_average / 2) > 0.49)"
-								class="fas fa-star-half-alt"
-							>
-							</i>
-							<!-- Empty stars with precedent half star-->
-							<span v-if="((item.vote_average / 2) - Math.floor(item.vote_average / 2) > 0.49)"
-							>
-								<i	
-									v-for="(star, index) in 4 - Math.floor(item.vote_average / 2)"
-									:key="'emptyStar'+index"
-									class="far fa-star"
-								>
-								</i>
-							</span>
-							<!-- Empty stars without half star-->
-							<span v-else>
-								<i	
-									v-for="(star, index) in 5 - Math.floor(item.vote_average / 2)"
-									:key="'emptyStar'+index"
-									class="far fa-star"
-								>
-								</i>
-							</span>
-						</li>
-					</ul>
-				</li>
-			</ul>
 		</section>
 	</main>
 </template>
 
 <script>
+import Card from '@/components/Card';
+
 export default {
 	name: 'Main',
+	components: {
+		Card,
+	},
 	props: {
 		films: Array,
-	},
-		
-	data () {
-		return {
-			flags: ["it", "en", "de", "es", "pt", "hi", "fr", "cs", "hu", "ko", "nl", "ja"],
-		};
 	},
 }
 </script>

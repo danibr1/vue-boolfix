@@ -1,7 +1,7 @@
 <template>
     <div id="app">
 	
-		<Header @search="searchFilm"/>
+		<Header @search="getData"/>
 
 		<div v-if="!loading && result===true">
 			<!-- Merge result array in "films" -->
@@ -26,6 +26,8 @@ export default {
     },
 	data() {
 		return {
+			apiURL: 'https://api.themoviedb.org/3/search/',
+			apiKey: '486ea1d24aaf19cdf5b08c8d82fbf42d',
 			moviesList: [],
 			seriesList: [],
 			movieDefaultUrl: "https://api.themoviedb.org/3/movie/550?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d",
@@ -36,11 +38,16 @@ export default {
 	},
 	methods: {
 		// API CALL MOVIES
-		searchFilm(search) {
+
+		
+
+
+		getData(searchText) {
 			axios
-				.get ("https://api.themoviedb.org/3/search/movie?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d", {
+				.get (this.apiURL + 'movie', {
 					params: {
-						query: search,
+						api_key: this.apiKey,
+						query: searchText,
 						language: "it-IT"
 					},
 				})
@@ -55,9 +62,10 @@ export default {
 			
 			// API CALL SERIES
 			axios
-				.get ("https://api.themoviedb.org/3/search/tv?api_key=486ea1d24aaf19cdf5b08c8d82fbf42d", {
+				.get (this.apiURL + 'tv', {
 					params: {
-						query: search,
+						api_key: this.apiKey,
+						query: searchText,
 						language: "it-IT"
 					},
 				})

@@ -4,7 +4,7 @@
         <img :src="logo.img" :alt="logo.name">
         
         <!-- SEARCH -->
-        <Search @search="searchItem"/>
+        <Search @search="getData"/>
 	</header>
 </template>
 
@@ -18,7 +18,7 @@ export default {
     },
     data (){
         return {
-            searchFilm: '',
+            searchText: '',
             logo: {
                 img: "https://fontmeme.com/permalink/210511/ba5cfce3f8e07f7651ec5e9120c84736.png",
                 name: 'Brunoflix'
@@ -26,9 +26,9 @@ export default {
         }
     },
     methods: {
-        searchItem(text) {
-            this.searchFilm = text;
-            this.$emit('search', this.searchFilm)
+        getData(text) {
+            this.searchText = text;
+            this.$emit('search', this.searchText)
         }
     }
 };

@@ -2,7 +2,7 @@
     <!-- FORM SEARCH FILM -->
     <form>
         <input 
-            v-model="searchFilm"
+            v-model.trim="searchFilm"
             type="text"
             name="search"
             id="search"
@@ -15,7 +15,6 @@
         >
         Cerca
         </button>
-      
     </form>
 </template>
 
@@ -31,5 +30,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+@import '@/styles/general';
+    
 </style>
