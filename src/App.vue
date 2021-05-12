@@ -7,7 +7,7 @@
 			<!-- Merge result array in "films" -->
 			<Main :films="moviesList.concat(seriesList)"/>
 		</div>
-		<div v-else>Nessun risulta > effettua una ricerca</div>
+		<div v-else>Nessun risultato > effettua una ricerca</div>
 
 	</div>
 </template>
