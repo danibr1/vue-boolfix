@@ -110,18 +110,18 @@ export default {
         position: relative;
         width: 342px;
         height: 513px;
-        margin-right: 10px;
-        margin-bottom: 20px;
+        margin-right: 5px;
         overflow: hidden;
         cursor: pointer;
         border-radius: 2px;
-    }
-    .poster {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
+        flex-shrink: 0;
+        .poster {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
     }
 
     ul {
@@ -133,14 +133,12 @@ export default {
         left: 10px;
         opacity: 0;
         transition: opacity 0.3s;
-    }
-
-    li {
-        margin-bottom: 1rem;
-    }
-
-    i {
-       color: rgb(233, 200, 55); 
+        li {
+            margin-bottom: 1rem;
+            i {
+                color: rgb(233, 200, 55); 
+            }
+        }
     }
 
     .flag-language {
@@ -172,5 +170,4 @@ export default {
     .card:hover ul {
         opacity: 1;
     }
-
 </style>
