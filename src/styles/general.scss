@@ -5,11 +5,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-    font-family: $main-font;
-    color: $text-col;
+    font-family:$main-font;
 }
 
 ul {
@@ -17,6 +13,13 @@ ul {
 }
 
 // UTILITIES
+
+.container {
+    max-width: 1270px;
+    margin: 0 auto
+}
+
+// FLEX
 .flex {
     display: flex;
 }
@@ -29,4 +32,6 @@ ul {
 .ai-center {
     align-items: center;
 }
-
+.flex-grow {
+    flex-grow: grow;
+}

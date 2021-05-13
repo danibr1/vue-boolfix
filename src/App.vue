@@ -82,5 +82,14 @@ export default {
 
 
 <style lang="scss">
+@import '@/styles/general';
+
+#app {
+	min-width: 100vh;
+	min-height: 100vh;
+	color: $text-white;
+	background: $bg-app;
+	
+}
 
 </style>

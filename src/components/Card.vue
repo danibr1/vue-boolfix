@@ -1,17 +1,18 @@
 <template>
-    <div>
+    <div class="card">
+        <!-- FILM POSTER -->
+            <img 
+                Class="poster"
+                v-if="info.poster_path != null"
+                :src="`https://image.tmdb.org/t/p/w342/${info.poster_path}`" 
+                :alt=" info.stitle == null ? info.name : info.title "
+            >
+            <!-- Poster = null -->
+            <img v-else
+                :src="require('@/assets/img/poster-null.png')" alt=""
+            >
+        <!-- DETAILS    -->
         <ul>
-            <!-- POSTER -->
-            <li>
-                <img v-if="info.poster_path != null"
-                    :src="`https://image.tmdb.org/t/p/w342/${info.poster_path}`" 
-                    :alt=" info.stitle == null ? info.name : info.title "
-                >
-                <!-- Poster = null -->
-                <img v-else
-                    :src="require('@/assets/img/poster-null.png')" alt=""
-                >
-            </li>
             <!-- NAME: Check movies or series -->
             <li>
                 <strong>Titolo:</strong>  
@@ -39,13 +40,12 @@
             <!-- VOTE -->
             <li>
                 <strong>Voto:</strong> 
-                <span>{{(info.vote_average / 2).toFixed(2) }}</span>
+                <span>{{ getStarVote(info.vote_average).toFixed(2) }}</span>
                 <!-- Full stars -->
                 <i
                     v-for="(star, index) in Math.floor(info.vote_average / 2)"
                     :key="'fullStar'+index"
-                    class="fas fa-star"
-                >
+                    class="fas fa-star">
                 </i>
                 <!-- Half stars -->
                 <i
@@ -73,6 +73,10 @@
                     </i>
                 </span>
             </li>
+            <li>
+                 <strong>Descrizione:</strong>  
+                <p class="overview">{{ info.overview }}</p>
+            </li>
         </ul>
     </div>
 </template>
@@ -92,23 +96,81 @@ export default {
         isFlag (lang) {
             return this.flags.includes(lang);
         },
+        getStarVote (vote) {
+            return Math.floor(vote / 2);
+        },
     },
 };
 </script>
 
 <style scoped lang="scss">
-@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css";
 @import '@/styles/general';
 
-	ul {
-		margin: 1rem 0;
-		li {
-			margin-bottom: 2px;
-		}
-	}
+    .card {
+        position: relative;
+        width: 342px;
+        height: 513px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        cursor: pointer;
+        border-radius: 2px;
+    }
+    .poster {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
 
-	.flag-language {
-		width: 30;
-		height: 24px;
-	}
+    ul {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 10px;
+        left: 10px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    li {
+        margin-bottom: 1rem;
+    }
+
+    i {
+       color: rgb(233, 200, 55); 
+    }
+
+    .flag-language {
+        width: 30px;
+        height: 24px;
+    }
+
+    .overview {
+        margin-top: 1rem;
+        height: 250px;
+        overflow: auto;
+    }
+
+
+    // LAYOVER
+    .card::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0, .8);
+        transition: opacity 0.3s;
+        opacity: 0;
+    }
+
+    .card:hover::after,
+    .card:hover ul {
+        opacity: 1;
+    }
+
 </style>

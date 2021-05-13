@@ -1,10 +1,13 @@
 <template>
-    <header class="flex jc-between ai-center "> 
-        <!-- BRAND -->
-        <img :src="logo.img" :alt="logo.name">
+    <header> 
         
-        <!-- SEARCH -->
-        <Search @search="getData"/>
+        <div class="container flex jc-between jc-center ai-center">
+            <!-- BRAND -->
+            <img :src="logo.img" :alt="logo.name">
+            
+            <!-- SEARCH -->
+            <Search @search="getData"/>
+        </div>
 	</header>
 </template>
 
@@ -35,8 +38,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 @import '@/styles/general';
     
+    header {
+        background: $bg-header;
+        padding: 10px;
+    }
+
     img {
         width: 150px;
     }
