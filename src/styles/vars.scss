@@ -1,7 +1,11 @@
 // COLORS
 $text-white: #fff;
-$bg-header: #222222;
-$bg-app: #000;
+$bg-header: linear-gradient(
+    0deg,
+    rgba(20, 20, 20, 0.9906163148853291) 14%,
+    rgba(0, 0, 0, 1) 100%
+);
+$bg-app: #141414;
 
 // General brand color
 $red: #db0510;

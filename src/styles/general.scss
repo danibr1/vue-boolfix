@@ -1,29 +1,31 @@
 // IMPORT VARS
 @import './vars';
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:$main-font;
+    font-family: $main-font;
 }
 
+h2 {
+    text-transform: uppercase;
+}
 ul {
     list-style: none;
 }
 
-// UTILITIES
-
-.container {
-    max-width: 1270px;
-    margin: 0 auto
+a {
+    text-decoration: none;
+    color: $text-white;
 }
 
 // FLEX
 .flex {
     display: flex;
 }
-.jc-center{
+.jc-center {
     justify-content: center;
 }
 .jc-between {
@@ -31,7 +33,4 @@ ul {
 }
 .ai-center {
     align-items: center;
-}
-.flex-grow {
-    flex-grow: grow;
 }
