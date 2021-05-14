@@ -23,6 +23,7 @@ export default {
     props: {
         films: Array,
     },
+    computed: {},
 };
 </script>
 
@@ -36,8 +37,8 @@ main {
     }
 }
 .cards {
-    height: 550px;
-    overflow-x: auto;
+    height: 570px;
+    overflow-x: scroll;
     padding: 20px 10px;
 }
 </style>

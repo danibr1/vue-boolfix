@@ -76,7 +76,7 @@ main {
 }
 .cards {
     height: 570px;
-    overflow-x: auto;
+    overflow-x: scroll;
     padding: 20px 10px;
 }
 </style>
