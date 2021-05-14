@@ -2,13 +2,19 @@
     <div id="app">
         <Header @search="getData" />
 
-        <div v-if="!loading">
-            <!-- Merge result array in "films" -->
-            <Main :films="moviesList.concat(seriesList)" />
-        </div>
-        <div class="loading" v-else>
-            Nessun risultato > effettua una ricerca
-        </div>
+        <!-- HOME-PAGE FILMS -->
+        <section v-if="loadingSearch">
+            <FilmsHomePage
+                :discover="discoverList"
+                :tradingMovies="tradingMoviesList"
+                :tradingMoviesList="tradingMoviesList"
+            />
+        </section>
+
+        <!-- SEARCHED MOVIES -->
+        <section v-else>
+            <FilmsSearch :films="moviesList.concat(seriesList)" />
+        </section>
     </div>
 </template>
 
@@ -16,29 +22,87 @@
 import axios from 'axios';
 
 import Header from '@/components/Header.vue';
-import Main from '@/components/Main.vue';
+import FilmsHomePage from '@/components/FilmsHomePage.vue';
+import FilmsSearch from '@/components/FilmsSearch.vue';
 
 export default {
     name: 'App',
     components: {
         Header,
-        Main,
+        FilmsSearch,
+        FilmsHomePage,
     },
     data() {
         return {
+            // Default
+            apiKey: '486ea1d24aaf19cdf5b08c8d82fbf42d',
+
+            // Search
             apiURL: 'https://api.themoviedb.org/3/search/',
+            moviesList: [],
+            seriesList: [],
+            loadingSearch: true,
+
+            // Home-Page
+            discoverAPI: 'https://api.themoviedb.org/3/discover/movie',
+            discoverList: [],
 
             trandingMoviesAPI:
                 'https://api.themoviedb.org/3/trending/movies/week',
-            // trandingTVAPI: "https://api.themoviedb.org/3/trending/tv/week",
-            // discoverAPI: "https://api.themoviedb.org/3/discover/movie",
+            tradingMoviesList: [],
 
-            apiKey: '486ea1d24aaf19cdf5b08c8d82fbf42d',
-            moviesList: [],
-            seriesList: [],
-            loading: true,
-            result: false,
+            trandingTVAPI: 'https://api.themoviedb.org/3/trending/tv/week',
+            tradingTVAPI: [],
         };
+    },
+    created() {
+        // API DISCOVER
+        axios
+            .get(this.discoverAPI, {
+                params: {
+                    api_key: this.apiKey,
+                    language: 'it-IT',
+                },
+            })
+            .then((res) => {
+                this.discoverList = res.data.results;
+                this.loading = false;
+            })
+            .catch((err) => {
+                console.log('Error', err);
+            });
+
+        // API TRADING MOVIES
+        axios
+            .get(this.trandingMoviesAPI, {
+                params: {
+                    api_key: this.apiKey,
+                    language: 'it-IT',
+                },
+            })
+            .then((res) => {
+                this.tradingMoviesList = res.data.results;
+                this.loading = false;
+            })
+            .catch((err) => {
+                console.log('Error', err);
+            });
+
+        // API TRADING TV
+        axios
+            .get(this.trandingTVAPI, {
+                params: {
+                    api_key: this.apiKey,
+                    language: 'it-IT',
+                },
+            })
+            .then((res) => {
+                this.tradingTVAPI = res.data.results;
+                this.loading = false;
+            })
+            .catch((err) => {
+                console.log('Error', err);
+            });
     },
     methods: {
         // API CALL MOVIES
@@ -53,7 +117,7 @@ export default {
                 })
                 .then((res) => {
                     this.moviesList = res.data.results;
-                    this.loading = false;
+                    this.loadingSearch = false;
                 })
                 .catch((err) => {
                     console.log('Error', err);
@@ -70,7 +134,7 @@ export default {
                 })
                 .then((res) => {
                     this.seriesList = res.data.results;
-                    this.loading = false;
+                    this.loadingSearch = false;
                 })
                 .catch((err) => {
                     console.log('Error', err);
