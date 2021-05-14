@@ -13,13 +13,13 @@
         <ul>
             <!-- NAME: Check movies or series -->
             <li>
-                <strong>Titolo:</strong>
+                <span class="strong">Titolo:</span>
                 {{ info.title == null ? info.name : info.title }}
             </li>
 
             <!-- ORIGINAL NAME: check movies or series -->
             <li>
-                <strong>Titolo originale:</strong>
+                <span class="strong">Titolo originale:</span>
                 <span>{{
                     info.original_title == null
                         ? info.original_name
@@ -29,7 +29,7 @@
 
             <!-- LANGUAGE: -->
             <li class="flex">
-                <strong>Lingua:</strong>
+                <span class="strong">Lingua:</span>
                 <img
                     class="flag-language"
                     v-if="isFlag(info.original_language)"
@@ -41,8 +41,10 @@
 
             <!-- VOTE -->
             <li>
-                <strong>Voto:</strong>
-                <span>{{ getStarVote(info.vote_average).toFixed(2) }}</span>
+                <span class="strong">Voto:</span>
+                <span class="vote">{{
+                    getStarVote(info.vote_average).toFixed(2)
+                }}</span>
                 <!-- Full stars -->
                 <i
                     v-for="(star, index) in Math.floor(info.vote_average / 2)"
@@ -88,7 +90,7 @@
                 </span>
             </li>
             <li>
-                <strong>Descrizione:</strong>
+                <span class="strong">Descrizione:</span>
                 <p class="overview">{{ info.overview }}</p>
             </li>
         </ul>
@@ -124,7 +126,7 @@ export default {
             return this.flags.includes(lang);
         },
         getStarVote(vote) {
-            return Math.floor(vote / 2);
+            return vote / 2;
         },
     },
 };
@@ -142,6 +144,7 @@ export default {
     cursor: pointer;
     border-radius: 2px;
     flex-shrink: 0;
+    transition: all 0.2s ease-in-out;
     .poster {
         position: absolute;
         top: 0;
@@ -149,6 +152,18 @@ export default {
         height: 100%;
         width: 100%;
     }
+    &:hover {
+        transform: scale(1.05);
+        z-index: 1;
+    }
+}
+
+.strong {
+    font-weight: bold;
+    margin-right: 5px;
+}
+.vote {
+    margin-right: 5px;
 }
 
 ul {

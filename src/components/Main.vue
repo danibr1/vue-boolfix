@@ -1,21 +1,24 @@
 <template>
     <main>
         <h2>Movies - Risultati della ricerca</h2>
-        <section class="cards">
+        <vueCustomScrollbar class="cards">
             <div class="flex">
                 <Card v-for="item in films" :key="item.id" :info="item" />
             </div>
-        </section>
+        </vueCustomScrollbar>
     </main>
 </template>
 
 <script>
+import vueCustomScrollbar from 'vue-custom-scrollbar';
+import 'vue-custom-scrollbar/dist/vueScrollbar.css';
 import Card from '@/components/Card';
 
 export default {
     name: 'Main',
     components: {
         Card,
+        vueCustomScrollbar,
     },
     props: {
         films: Array,
@@ -33,6 +36,8 @@ main {
     }
 }
 .cards {
+    height: 550px;
     overflow-x: auto;
+    padding: 5px;
 }
 </style>
