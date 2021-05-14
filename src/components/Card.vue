@@ -142,9 +142,10 @@ export default {
     margin-right: 5px;
     overflow: hidden;
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 5px;
     flex-shrink: 0;
     transition: all 0.2s ease-in-out;
+    font-size: 16px;
     .poster {
         position: absolute;
         top: 0;
@@ -153,7 +154,7 @@ export default {
         width: 100%;
     }
     &:hover {
-        transform: scale(1.05);
+        transform: scale(1.09);
         z-index: 1;
     }
 }

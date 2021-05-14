@@ -6,8 +6,8 @@
         <section v-if="loadingSearch">
             <FilmsHomePage
                 :discover="discoverList"
+                :tradingTV="tradingTVList"
                 :tradingMovies="tradingMoviesList"
-                :tradingMoviesList="tradingMoviesList"
             />
         </section>
 
@@ -47,12 +47,11 @@ export default {
             discoverAPI: 'https://api.themoviedb.org/3/discover/movie',
             discoverList: [],
 
+            trandingTVAPI: 'https://api.themoviedb.org/3/trending/tv/week',
+            tradingTVList: [],
             trandingMoviesAPI:
                 'https://api.themoviedb.org/3/trending/movies/week',
             tradingMoviesList: [],
-
-            trandingTVAPI: 'https://api.themoviedb.org/3/trending/tv/week',
-            tradingTVAPI: [],
         };
     },
     created() {
@@ -72,6 +71,22 @@ export default {
                 console.log('Error', err);
             });
 
+        // API TRADING TV
+        axios
+            .get(this.trandingTVAPI, {
+                params: {
+                    api_key: this.apiKey,
+                    language: 'it-IT',
+                },
+            })
+            .then((res) => {
+                this.tradingTVList = res.data.results;
+                this.loading = false;
+            })
+            .catch((err) => {
+                console.log('Error', err);
+            });
+
         // API TRADING MOVIES
         axios
             .get(this.trandingMoviesAPI, {
@@ -82,22 +97,6 @@ export default {
             })
             .then((res) => {
                 this.tradingMoviesList = res.data.results;
-                this.loading = false;
-            })
-            .catch((err) => {
-                console.log('Error', err);
-            });
-
-        // API TRADING TV
-        axios
-            .get(this.trandingTVAPI, {
-                params: {
-                    api_key: this.apiKey,
-                    language: 'it-IT',
-                },
-            })
-            .then((res) => {
-                this.tradingTVAPI = res.data.results;
                 this.loading = false;
             })
             .catch((err) => {

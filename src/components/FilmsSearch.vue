@@ -2,7 +2,7 @@
     <main>
         <h2>Movies - Risultati della ricerca</h2>
         <vueCustomScrollbar class="cards">
-            <div class="flex">
+            <div class="flex ai-center">
                 <Card v-for="item in films" :key="item.id" :info="item" />
             </div>
         </vueCustomScrollbar>
@@ -15,7 +15,7 @@ import 'vue-custom-scrollbar/dist/vueScrollbar.css';
 import Card from '@/components/Card';
 
 export default {
-    name: 'Main',
+    name: 'FilmsSearch',
     components: {
         Card,
         vueCustomScrollbar,
@@ -38,6 +38,6 @@ main {
 .cards {
     height: 550px;
     overflow-x: auto;
-    padding: 5px;
+    padding: 20px 10px;
 }
 </style>

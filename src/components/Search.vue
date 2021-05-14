@@ -25,7 +25,7 @@
             <a href="#"
                 ><img
                     class="profile-icon"
-                    src="https://occ-0-2773-1490.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABbme8JMz4rEKFJhtzpOKWFJ_6qX-0y5wwWyYvBhWS0VKFLa289dZ5zvRBggmFVWVPL2AAYE8xevD4jjLZjWumNo.png?r=a41"
+                    src="https://i.pinimg.com/564x/b4/0f/9f/b40f9f8fc0fb88aabf2a8acbc39c0ac0.jpg"
                     alt=""
             /></a>
         </span>
@@ -87,6 +87,7 @@ span {
         }
     }
     img {
+        width: 35px;
         border-radius: 3px;
     }
 }
