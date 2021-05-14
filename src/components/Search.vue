@@ -81,6 +81,10 @@ span {
     }
     i {
         font-size: 1.3rem;
+        transition: color 0.3s;
+        &:hover {
+            color: rgb(172, 170, 170);
+        }
     }
     img {
         border-radius: 3px;
